@@ -1,28 +1,29 @@
-import { ApiConfigs, baseURL } from "../apiConfigs"
+import { ApiConfigs, baseURL } from "../apiConfigs";
 
 export const signIn = async (login: string, pass: string) => {
-    // const requestParams = ApiConfigs.signIn(login, pass);
-    const requestParams = ApiConfigs.getRoles();
+  const requestParams = ApiConfigs.signIn(login, pass);
 
-    try {
-        const response = await fetch(baseURL, {
-            method: "POST",
-            headers: {
-                // "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: requestParams,
-            // mode: "no-cors",
-            credentials: "include",
-        });
+  try {
+    const response = await fetch(baseURL, {
+      method: "POST",
+      body: requestParams,
+      //   mode: "no-cors",
+      //   credentials: "include",
+      redirect: "follow",
+    });
 
-        console.log(response);
-        if (!response.ok) {
-            throw new Error("Неверный логин/пароль");
-        }
-
-        return response.text();
-    } catch (err) {
-        throw new Error("Ошибка авторизации!");
+    if (!response.ok) {
+      throw new Error("Ошибка авторизации");
     }
+
+    const data = await response.json();
+
+    if (data[0].code !== 200) {
+      throw new Error("Ошибка авторизации");
+    }
+
+    return data[1].response;
+  } catch (err) {
+    throw err;
+  }
 };

@@ -1,37 +1,17 @@
 <script setup lang="ts">
-import HelloWorld from "@/components/HelloWorld.vue"
-import { signIn } from "../shared/api/endpoints/signIn";
-
-const fetch = async () => {
-  const resp = await signIn('vvelichko.2000@mail.ru', '3pCEGpxBn47');
-  console.log(resp)
-}
+// import { signIn } from "../shared/api/endpoints/signIn";
+import AuthProvider from "@/app/providers/AuthProvider/index.vue";
+import NotificationLayout from "./layouts/NotificationLayout.vue";
+// const fetch = async () => {
+//   const resp = await signIn('vvelichko.2000@mail.ru', '3pCEGpxBn47');
+//   console.log(resp)
+// }
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="@/assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-  <button @click="fetch">click</button>
+  <NotificationLayout>
+    <AuthProvider>
+      <router-view></router-view>
+    </AuthProvider>
+  </NotificationLayout>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

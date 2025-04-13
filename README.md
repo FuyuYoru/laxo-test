@@ -1,5 +1,26 @@
-# Vue 3 + TypeScript + Vite
+# Vue 3 + TypeScript + Vite + Pinia + TailwindCSS
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Установка и запуск
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+1. Для установки зависимостей выполните команду:
+    ```bash
+    npm install
+    ```
+
+2. Для запуска проекта используйте команду:
+    ```bash
+    npm run dev
+    ```
+
+> **Примечание**: В проекте не используются `env` переменные.
+
+## Комментарии к коду
+
+1. В проекте используется структура FSD (Feature-Sliced Design).
+
+2. `sid` сохраняется в `localStorage`. Это решение было принято для упрощения процесса тестирования, чтобы не авторизовываться каждый раз. Для продакшн-версии рекомендуется хранить `sid` на сервере, используя соответствующую серверную часть.
+
+3. В документации не было найдено метода получения данных о пользователе через `sid`, поэтому в реализации компонента "Профиль пользователя" отсутствуют подробности о пользователе. В текущей реализации доступны только токен и основные данные.
+
+4. Почти все типы в интерфейсах указаны как `string`, поскольку сервер возвращает данные в этом формате. Если пытаться указать типы исходя из логики (например, для поля `id` использовать тип `number`), Vue начинает генерировать ошибки.
+
